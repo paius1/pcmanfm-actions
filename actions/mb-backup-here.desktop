@@ -16,8 +16,8 @@ Icon[en]=document-save-as
 Icon[C]=document-save-as
 
 [X-Action-Profile profile-zero]
-MimeTypes=all/allfiles;!inode/directory;
-Exec=/home/paul/bin/backupfilehere.sh %f
+MimeTypes=all/allfiles; !inode/directory;
+Exec=$HOME/bin/backupfilehere.sh %f
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile
