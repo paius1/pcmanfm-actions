@@ -10,6 +10,5 @@ MimeTypes=inode/directory;
 [X-Action-Profile profile-zero]
 MimeTypes=inode/directory;
 #MimeType=inode/directory;
-Exec=/home/paul/bin/emblemize3 %f
+Exec=$HOME/bin/emblemize3 %f
 Name=Default Profile
-
