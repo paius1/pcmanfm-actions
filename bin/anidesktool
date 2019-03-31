@@ -1,0 +1,239 @@
+#!/bin/bash 
+
+# Simple file to create and edit iDesk lnk files
+# Version 0.1
+#         0.1.1 added delete for existing lnk file and restart 
+#		        of idesk
+# Paul Groves March 2019
+
+# Check for yad
+  command -v yad >/dev/null 2>&1 || { echo -e  "\n     YAD NOT FOUND     \n" | xmessage -center -file -; exit 1; }
+
+# Checking for idesk is a good idea
+  command -v idesk >/dev/null 2>&1 || { echo -e  "\n     iDesk NOT FOUND     \n" | xmessage -center -file -; exit 1; }
+ 
+# Check for .ideskrc and .idesktop
+  if [ -d ${HOME}/.idesktop ] ; then
+      echo "Desktop exits";
+  else
+     # DESKTOP DOES NOT EXIST
+	  yad --center \
+	  --window-icon=gtk-yes \
+	  --image "dialog-question" \
+	  --borders=20 \
+	  --title="ideskrc File Not Found" \
+	  --text-align=center \
+	  --text="**Desktop folder not found**\n\nCreate it?" \
+	  --button=gtk-no:0 \
+	  --button=gtk-yes:1 
+	  input=$?
+      
+      if [ "$input" -eq 0 ]; then
+		  yad --center --window-icon=gtk-no \
+  	      --window-icon=gtk-no \
+		  --borders=20 \
+		  --width=200 \
+		  --title="ideskrc File Not Found" \
+		  --text-align=center \
+		  --text="<b>Good Bye</b>\n" \
+		  --button=gtk-ok:0
+		  exit 4
+	  else
+	     mkdir ${HOME}/.idesktop
+	     yad \
+	     --title="IDesk Desktop Directory" \
+		 --borders=20 \
+	     --text="<b> Created Desktop Directory </b>" \
+	     
+	  fi
+   fi
+  
+  if [ -f ${HOME}/.ideskrc ]; then
+echo "User config exists";
+	  # This is for the step of X and Y in the yad dialog
+	    snapWidth=`cat $HOME/.ideskrc | grep SnapWidth | awk -F: '{print $2}'`
+	    snapHeight=`cat $HOME/.ideskrc | grep SnapHeight | awk -F: '{print $2}'`
+  else 
+	  # This is the idesk default snap
+	    snapWidth=10
+	    snapHeight=10
+  fi
+
+# If something is passed to this script
+#  we check if its a lnk file?
+  if [ "$#" -eq 1 ]; then
+	lnkFile=$1
+echo ${lnkFile}
+	# need file name stripped of extension
+	  fileName=$(basename -- $lnkFile)
+	  fileNoExt="${fileName%.*}"
+	  fileExt="${filename##*.}"
+	  echo Filename $fileNoExt dot  Ext $fileExt
+	  echo
+    # Wrong format throw it out
+	if [ ${fileExt} ! lnk ]; then
+	  lnkFile+""
+	fi
+#echo =======================================
+#cat ${lnkFile}
+#echo =======================================	
+  fi
+
+# Everything must be on the display 
+# this is needed for yad NUM RANGE
+echo -------------------------------------------------
+  screenWidth=$(xdpyinfo | awk '/dimensions:/ { sub("x", " ");  print $2" "$3 }'|awk '{print $1}')
+  screenHeight=$(xdpyinfo | awk '/dimensions:/ { sub("x", " ");  print $2" "$3 }'|awk '{print $2}')
+echo Screen is ${screenWidth} X ${screenHeight}
+echo -------------------------------------------------
+#if [ "$fname" = "a.txt" ] || [ "$fname" = "c.txt" ]
+if [ -z ${lnkFile} ] || [ ! -f ${lnkFile} ]; then
+# NEW LNK FILE
+echo creating new lnk file
+	Caption=${fileNoExt}
+	window_icon="/usr/share/idesk/folder_home.xpm"
+	Width=48
+	Height=48
+	Prompt="New"
+  # Let's put it in the middle of the screen to start with
+    centerX=$((screenWidth/2))
+    centerY=$((screenHeight/2))
+  # And give it a default icon  	
+	windowIcon=/usr/share/idesk/folder_home.xpm
+		
+else
+# EXISTING LNK FILE
+  # Add option to delete lnk
+  delete_dialog() {  
+	yad --text "<b>Delete Link ${1}</b>" \
+	    --borders=20
+    exval=$?
+    case $exval in
+        1) echo -e "\npressed Cancel.\n";;
+        0) rm "${HOME}/.idesktop/${1}"
+           killall yad
+           killall idesk 
+           exec idesk > /dev/null 2> /dev/null &
+           pidof -x anidesktool | xargs kill -9
+        ;;
+    esac
+  }
+
+  # Make "Delete" Button visible for existing file
+	deleteLink="Delete Link"
+	deleteButton="gtk-delete"
+	export -f delete_dialog
+	
+	# add existing values from lnk file
+	  Caption=`grep -m 1 -e '^[[:blank:]]*Caption:' ${lnkFile} | cut -d : -f 2`
+	  ToolTip=`grep -m 1 -e '^[[:blank:]]*ToolTip.Caption:' ${lnkFile} | cut -d : -f 2`
+	# default link only has Command not Command[0|1]
+	  Command=`grep -m 1 -e '^[[:blank:]]*Command:' ${lnkFile} | cut -d : -f 2`
+	  if [ -z ${Command} ]; then
+	  	  CommandA=`grep -m 1 -e '^[[:blank:]]*Command\[0\]:' ${lnkFile} | cut -d : -f 2`
+	  	  CommandB=`grep -m 1 -e '^[[:blank:]]*Command\[1\]:' ${lnkFile} | cut -d : -f 2`
+	  else
+	      CommandA=${Command}
+	  fi
+	  Icon=`grep -m 1 -e '^[[:blank:]]*Icon' ${lnkFile} | cut -d : -f 2`
+	  Width=`grep -m 1 -e '^[[:blank:]]*Width' ${lnkFile} | cut -d : -f 2`
+	  Height=`grep -m 1 -e '^[[:blank:]]*Height' ${lnkFile} | cut -d : -f 2`
+	  centerX=`grep -m 1 -e '^[[:blank:]]*X' ${lnkFile} | cut -d : -f 2`
+	  centerY=`grep -m 1 -e '^[[:blank:]]*Y' ${lnkFile} | cut -d : -f 2`
+# Info for yad dialog
+		iconPath=`dirname ${Icon}`
+		iconName=`basename ${Icon}`
+		windowIcon="$iconPath/${iconName}"
+		Prompt="Change"
+	   
+	echo	  Caption $Caption
+	echo	  ToolTip $ToolTip
+	echo	  Command $Command
+	echo	  CommandA $CommandA
+	echo	  CommandB $CommandB
+	echo	  Icon $Icon
+	echo	  Width $Width
+	echo	  Height $Height
+	echo	  centerX $centerX
+	echo	  centerY $centerY
+fi
+
+# Things I have tried and discarded
+# 
+## 	--image="/usr/share/idesk/folder_home.xpm" \
+##	--image-on-top \
+	#--file-filter="All Files | *.*" \
+	#--file-filter="All Files | *.*" \
+	#--file-filter="Image Files (*.png *.xpm *.svg)| *.png *.xpm *.svg" \
+#    --button="${deleteLink}!${deleteButton}":2 \
+#    --button=gtk-cancel:0 \
+#    --button=gtk-ok:1 \
+
+# Main Dialog
+  fileItems=`yad --width=400 \
+	--borders=20 \
+	--text-align=center \
+	--image-on-top \
+	--add-preview \
+	--title="IDesk link file Editor" \
+	--text="<b> ${Prompt} Details for ${fileNoExt} IDesk Link</b>\n" \
+	--image=${windowIcon}  \
+    --window-icon="$windowIcon" \
+   	--separator=":" \
+	--form \
+	--columns=2 \
+	--field="Caption" "${Caption}" \
+	--field="ToolTip" "${ToolTip}" \
+	--field="Command [0]":SFL "${CommandA}" \
+	--field="Command [1]":SFL "${CommandB}" \
+	--field="Icon":SFL "${Icon}" \
+	--field="Width:NUM" "$Width"!12..96!1!0 \
+	--field="Height":NUM ${Height}!12..96!1!0 \
+	--field="X":NUM $centerX!0.."$screenWidth"!"$snapWidth"!0 \
+	--field="Y":NUM $centerY!0.."$screenHeight"!"$snapHeight"!0 \
+	--field="${deleteLink}!${deleteButton}":BTN "bash -c 'delete_dialog ${fileName}'" \
+	"" "" "" "" "" "" "" "" "" ""`
+#echo ${fileItems}
+		
+Caption=`echo ${fileItems}| cut -d : -f 1`
+ToolTip=`echo ${fileItems}| cut -d : -f 2`
+CommandA=`echo ${fileItems}| cut -d : -f 3`
+CommandB=`echo ${fileItems}| cut -d : -f 4`
+Icon=`echo ${fileItems}| cut -d : -f 5`
+Width=`echo ${fileItems}| cut -d : -f 6`
+Height=`echo ${fileItems}| cut -d : -f 7`
+centerX=`echo ${fileItems}| cut -d : -f 8`
+centerY=`echo ${fileItems}| cut -d : -f 9`
+
+# Empty  ToolTip use Caption
+  if [ -z ${ToolTip} ]; then
+	ToolTip=${Caption}
+  fi
+
+# For a new lnk use the caption as its filename
+  if [ -z ${fileNoExt} ]; then
+	fileNoExt=`echo ${Caption// /_}`
+  fi
+
+# if no command is given just exit
+  if [ -z ${CommandA} ]; then
+	exit 65
+  fi
+
+# if only one command then the second command calls this script
+  if [ -z "${CommandB}" ]; then
+	CommandB="anidesktool ${HOME}/.idesktop/${fileNoExt}.lnk"
+  fi
+
+# if no icon is given use the idesk home icon
+  if [ -z ${Icon} ]; then
+	Icon="/usr/share/idesk/folder_home.xpm"
+  fi
+
+	#echo -------------------------------------------------
+	#echo writing to ${HOME}/.idesktop/${fileNoExt}.lnk
+echo -e "table Icon\n  Caption: ${Caption}\n  ToolTip.Caption: ${ToolTip}\n  Icon: ${Icon}\n  Command[0]: ${CommandA}\n  Command[1]: ${CommandB}\n  Width: ${Width}\n  Height: ${Height}\n  X: ${centerX}\n  Y: ${centerY}\nend" | tee ${HOME}/.idesktop/${fileNoExt}.lnk
+sleep 1
+killall idesk && idesk &
+
+exit 0
