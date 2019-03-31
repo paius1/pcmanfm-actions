@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+Tooltip[en_US]=Backup File Here
+Tooltip[en]=Backup File Here
+Tooltip[C]=Backup File Here
+ToolbarLabel[en_US]=Backup File Here
+ToolbarLabel[en]=Backup File Here
+ToolbarLabel[C]=Backup File Here
+Name[en_US]=Backup File Here
+Name[en]=Backup File Here
+Name[C]=Backup File Here
+Profiles=profile-zero;
+Icon[en_US]=document-save-as
+Icon[en]=document-save-as
+Icon[C]=document-save-as
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;!inode/directory;
+Exec=/home/paul/bin/backupfilehere.sh %f
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile

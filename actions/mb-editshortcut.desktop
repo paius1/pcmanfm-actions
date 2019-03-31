@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+ToolbarLabel[en_US]=Edit Desktop Shortcut
+ToolbarLabel[en]=Edit Desktop Shortcut
+ToolbarLabel[C]=Edit Desktop Shortcut
+Name[en_US]=Edit Desktop Shortcut
+Name[en]=Edit Desktop Shortcut
+Name[C]=Edit Desktop Shortcut
+Profiles=profile-zero;
+Icon[en_US]=desktop
+Icon[en]=desktop
+Icon[C]=desktop
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/x-desktop;
+Exec=lxshortcut -i %f
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile

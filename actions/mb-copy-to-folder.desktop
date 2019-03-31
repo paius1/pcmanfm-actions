@@ -1,0 +1,22 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+ToolbarLabel[en_US]=Copy To Folder
+ToolbarLabel[en]=Copy To Folder
+ToolbarLabel[C]=Copy To Folder
+Name[en_US]=Copy To Folder
+Name[en]=Copy To Folder
+Name[C]=Copy To Folder
+Profiles=profile-zero;
+
+Icon[en_US]=cab_extract
+Icon[en]=cab_extract
+Icon[C]=cab_extract
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;!inode/directory;
+Exec=/home/paul/bin/copy2folder.sh %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile
+

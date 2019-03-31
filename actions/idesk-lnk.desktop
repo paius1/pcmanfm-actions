@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+Tooltip[en]=Edit iDesk lnk File
+ToolbarLabel[en]=Edit iDesk lnk File
+Name[en]=Edit iDesk lnk
+Profiles=profile-zero;
+Icon[en]=document-save-as
+
+X-Desktop-File-Install-Version=0.23
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/x-ms-shortcut;
+Exec=/home/paul/bin/aidesktool %f
+Name[en]=Default profile

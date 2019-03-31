@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Hidden= false
+Type=Menu
+Icon=application-other
+Name=Menu Development
+Tooltip=Development
+ToolbarLabel=Development
+ItemsList=idesk-lnk;executable;compare2files;find-files

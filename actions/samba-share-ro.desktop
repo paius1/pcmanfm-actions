@@ -1,0 +1,36 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+Profiles=profile-zero;
+Name=Create Windows Share (read only) %f
+Tooltip=Create Windows Share (read only) %f
+ToolbarLabel=Create Windows Share (read only) %f
+Icon=samba
+MimeTypes=inode/directory;
+
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;
+Exec=Exec=/usr/bin/net usershare add %w %f "" Everyone:R guest_ok=y
+Name=default profile
+#MimeTypes=inode/directory;
+
+#[Desktop Entry]
+#Type=Action
+#Name=SambaGuestReadOnly
+#Profiles=profile-zero;
+
+#  [X-Action-Profile profile-zero]
+#  Exec=/usr/bin/net usershare add %w %f "" Everyone:R guest_ok=y
+#  Name=Default profile
+
+#  I created another one called SambaGuestWite.desktop with this exec:
+#Code:
+
+#  Exec=/usr/bin/net usershare add %w %f "" Everyone:F guest_ok=y
+
+#  net usershare add %w %f "" Everyone:F guest_ok=y && chmod = 777 %f
+#  Note2: The possible values in usershare are:
+#  Everyone:R - Read only
+#  Everyone:F - Writeable
+#  guest_ok=y - Allow guest access
+#  guest_ok=n - Do no allow guest access 

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Action
+Hidden= false
+Name[en_US]=Find Files
+Name=Find Files
+Profiles=profile-zero
+Icon=file
+
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory
+Exec=/home/paul/bin/pcmanfm --find-files %f
+Name=Default Profile
