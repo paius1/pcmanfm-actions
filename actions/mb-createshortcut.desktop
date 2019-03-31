@@ -14,12 +14,12 @@ Icon[C]=add
 
 [X-Action-Profile profile-zero]
 MimeTypes=all/allfiles;!application/x-desktop
-Exec=/home/paul/bin/createshortcut.sh %f
+Exec=$HOME/bin/createshortcut.sh %f
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile
 
 [X-Action-Profile profile-1]
 MimeTypes=inode/directory
-Exec=/home/paul/bin/createshortcut.sh %f 
+Exec=$HOME/bin/createshortcut.sh %f 
 Name[en]=Create link to folder
