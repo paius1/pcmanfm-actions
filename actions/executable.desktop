@@ -4,9 +4,9 @@ Hidden= false
 Name[en_US]=Make Executable
 Name=Make Executable
 Profiles=profile-zero
-Icon=/home/paul/.icons/Dark-Mode-circle/apps/48/application-default-icon.svg
+Icon=application-default-icon
 
 [X-Action-Profile profile-zero]
-MimeTypes=all/allFiles
-Exec=/home/paul/bin/make-executable.sh %f
+MimeTypes=all/allFiles;
+Exec=$HOME/bin/make-executable.sh %f
 Name=Default Profile
