@@ -15,7 +15,7 @@ Icon[C]=stock_spellcheck
 
 [X-Action-Profile profile-zero]
 MimeTypes=application/x-desktop;
-Exec=/home/paul/bin/renameshortcut.sh %d %b
+Exec=$HOME/bin/renameshortcut.sh %d %b
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile
