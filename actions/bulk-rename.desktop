@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Action
+NoDisplay=false
+Name[en]=Bulk Rename
+Tooltip[en]=Rename Files in Bulk
+ToolbarLabel[en]=Bulk Rename Files Here
+Profiles=profile-zero;
+Icon[en]=thunar
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;
+Exec=thunar -B %F
+Name[en]=Default profile
+SelectionCount=>1
