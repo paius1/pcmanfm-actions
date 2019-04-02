@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Action
+NoDisplay= false
+Name[en_US]=Mount ISO
+Name=Mount ISO
+Profiles=profile-zero
+Icon=application-default-icon
+MimeTypes=application/x-cd-image;
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/x-cd-image;
+TryExec=mountiso.sh
+Exec=mountiso.sh %f
+Name=Default Profile
