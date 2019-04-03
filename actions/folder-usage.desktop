@@ -1,0 +1,24 @@
+[Desktop Entry]
+Type=Action
+NoDisplay= false
+ToolbarLabel[en_US]=Folder Disk Usage
+ToolbarLabel[en]=Folder Disk Usage
+ToolbarLabel[C]=Folder Disk Usage
+Name[en_US]=Folder Disk Usage
+Name[en]=Folder Disk Usage
+Name[C]=Folder Disk Usage
+Profiles=profile-zero;
+
+Icon[en_US]=baobab
+Icon[en]=baobab
+Icon[C]=baobab
+MimeTypes=inode/directory;
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;
+TryExec=baobab
+Exec=baobab %d
+#Exec=pcmanfm -w %f
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile
+#SelectionCount==1
