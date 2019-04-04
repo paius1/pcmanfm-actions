@@ -16,8 +16,8 @@
 #       <iso mounter>
 #       Amr Osman <dr3mro@gmail.com>
 #       0.4
-# 		This creates a folder in the current directory and mounts
-#		ISO there - yes you have to delete this directory 
+# This creates a folder in the same directory and mounts
+#  ISO there - yes you have to delete this directory 
 
 	  iso=$1
 	  path=$(dirname $iso)
