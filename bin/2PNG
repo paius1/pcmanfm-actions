@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+def new_name(file):
+    splited=os.path.splitext(file)
+    return '.'.join([splited[0],'png'])
+
+files = sys.argv[1:]
+
+for file in files:
+    os.system('convert "%s" "%s"' % (file, new_name(file)))
+    
+    ###inkscape -z -e out.png -w 1000 -h 1000 in.svg###
+    ### if using convert svg to png need rsvg-convert ####
