@@ -54,7 +54,7 @@ echo ---------------------------------------------
 		#defaultApp=`xdg-mime query default ${mimeType}`
 		#echo ${defaultApp}
 	
-appInfo=`/home/paul/bin/map-binary.sh "$fileWpath"`
+appInfo=`map-binary.sh "$fileWpath"`
 echo _______________________________
 echo  ${appInfo}
 
@@ -101,7 +101,7 @@ echo MIME ${mimeType}
 echo Exec ${Exec}
 echo Icon ${Icon}
 
-#defaultApp=`/home/paul/bin/map-binary.sh $file`
+#defaultApp=`${HOME}/bin/map-binary.sh $file`
 #echo Open with ${defaultApp}
 
 # Create and edit .desktop file 
