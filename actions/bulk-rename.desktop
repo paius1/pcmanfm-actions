@@ -1,14 +1,41 @@
 [Desktop Entry]
+Version=1.0
 Type=Action
 NoDisplay=false
 Name[en]=Bulk Rename
 Tooltip[en]=Rename Files in Bulk
 ToolbarLabel[en]=Bulk Rename Files Here
-Profiles=profile-zero;
-Icon[en]=thunar
+Profiles=profile-thunar-files;profile-thunar-folder;profile-gprename-files;profile-gprename-folder;
+Icon=bulk-rename
+Icon[en]=bulk-rename
 
-[X-Action-Profile profile-zero]
+[X-Action-Profile profile-thunar-files]
 MimeTypes=all/allfiles;
+TryExec=thunar
 Exec=thunar -B %F
-Name[en]=Default profile
-SelectionCount=>1
+Name[en]=Xfce profile
+SelectionCount= >1
+
+[X-Action-Profile profile-thunar-folder]
+MimeTypes=inode/directory;
+TryExec=thunar
+Exec=thunar -B %d
+Name[en]=Xfce profile
+SelectionCount= >0 
+
+[X-Action-Profile profile-gprename-files]
+MimeTypes=all/allfiles;
+TryExec=gprename
+Path= %d
+Exec=gprename %F
+Name[en]=gprename profile
+SelectionCount= >1
+
+[X-Action-Profile profile-gprename-folder]
+MimeTypes=inode/directory;
+TryExec=gprename
+Path= %d
+Exec=gprename %d
+Name[en]=gprename profile
+SelectionCount= >0
+

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
 Name[en_US]=Set Folder Emblem
 Name=Set Folder Emblem
 Profiles=profile-zero
@@ -10,5 +10,6 @@ MimeTypes=inode/directory;
 [X-Action-Profile profile-zero]
 MimeTypes=inode/directory;
 #MimeType=inode/directory;
-Exec=$HOME/bin/emblemize3 %f
+Exec=/home/paul/bin/emblemize3 %f
 Name=Default Profile
+

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
 ToolbarLabel[en_US]=Set As Wallpaper
 ToolbarLabel[en]=Set As Wallpaper
 ToolbarLabel[C]=Set As Wallpaper
@@ -12,11 +12,15 @@ Profiles=profile-zero;
 Icon[en_US]=preferences-desktop-wallpaper
 Icon[en]=preferences-desktop-wallpaper
 Icon[C]=preferences-desktop-wallpaper
+MimeTypes=image/*;
+#profiles for many ways to set background
+#Profiles=feh;nitrogen;pcmanfm;gpicview_on_images;
+#gsettings set org.gnome.desktop.background picture-uri file://
 
 [X-Action-Profile profile-zero]
 MimeTypes=image/*;
-Exec=/usr/bin/feh --bg-scale %f
-#Exec=/usr/bin/pcmanfm -w %f
+Exec=feh --bg-scale %f
+#Exec=pcmanfm -w %f
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile

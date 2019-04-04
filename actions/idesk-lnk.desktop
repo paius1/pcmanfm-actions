@@ -1,13 +1,15 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
+Name[en]=Edit iDesk lnk
 Tooltip[en]=Edit iDesk lnk File
 ToolbarLabel[en]=Edit iDesk lnk File
-Name[en]=Edit iDesk lnk
 Profiles=profile-zero;
 Icon[en]=document-save-as
+MimeTypes=application/x-ms-shortcut;
 
 [X-Action-Profile profile-zero]
 MimeTypes=application/x-ms-shortcut;
-Exec=$HOME/bin/aidesktool %f
+TryExec=anidesktool
+Exec=anidesktool %f
 Name[en]=Default profile

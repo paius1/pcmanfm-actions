@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
-Profiles=profile-zero;profile-1;profile-2;
+NoDisplay= false
 Name[en_US]=Open As Root
 Name[en]=Open As Root
 Name[C]=Open As Root
@@ -11,6 +10,7 @@ Tooltip[C]=Open As Root
 ToolbarLabel[en_US]=Open As Root
 ToolbarLabel[en]=Open As Root
 ToolbarLabel[C]=Open As Root
+Profiles=profile-zero;profile-1;profile-2;
 
 Icon[en_US]=stop
 Icon[en]=stop

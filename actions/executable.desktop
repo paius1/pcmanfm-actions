@@ -1,12 +1,14 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
 Name[en_US]=Make Executable
 Name=Make Executable
 Profiles=profile-zero
 Icon=application-default-icon
+MimeTypes=all/allfiles;
 
 [X-Action-Profile profile-zero]
-MimeTypes=all/allFiles;
-Exec=$HOME/bin/make-executable.sh %f
+MimeTypes=all/allfiles; !inode/directory;
+TryExec=make-executable.sh
+Exec=make-executable.sh %f
 Name=Default Profile

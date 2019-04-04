@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
+Name=Create Windows Share (read only) 
+Tooltip=Create Windows Share (read only) 
+ToolbarLabel=Create Windows Share (read only)
 Profiles=profile-zero;
-Name=Create Windows Share (read only) %f
-Tooltip=Create Windows Share (read only) %f
-ToolbarLabel=Create Windows Share (read only) %f
 Icon=samba
 MimeTypes=inode/directory;
 

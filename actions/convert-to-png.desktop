@@ -1,0 +1,29 @@
+[Desktop Entry]
+Type=Action
+NoDisplay= false
+Name[en_US]=Convert to PNG
+Name[en]=Convert to PNG
+Name[C]=Convert to PNG
+Tooltip=Convert to PNG
+ToolbarLabel[en_US]=Convert to PNG
+ToolbarLabel[en]=Convert to PNG
+ToolbarLabel[C]=Convert to PNG
+Icon=image
+Icon[en_US]=image
+Icon[en]=image
+Icon[C]=image
+Profiles=profile-svg-png;
+Mimetypes=image/*;
+
+[X-Action-Profile profile-svg-png]
+
+MimeTypes=image/svg+xml;
+Tooltip=svg to png
+ToolbarLabel=svg to png
+# image/svg;
+TryExec=rsvg-convert
+Exec=2PNG %F
+Name[en_US]=svg to png profile
+Name[en]=svg to png  profile
+Name[C]=svg to png profile
+

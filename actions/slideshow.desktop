@@ -1,11 +1,12 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
 Name=Run Slideshow
 Name[ru]=Запустить слайдшоу
 ToolbarLabel[C]=Run Slideshow
 Icon=image-x-generic
 Profiles=viewnior_on_folder;viewnior_on_images;gpicview_on_folder;gpicview_on_images;
+MimeTypes=image/*;inode/directory;
 
 [X-Action-Profile viewnior_on_folder]
 TryExec=viewnior

@@ -1,14 +1,15 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
+NoDisplay= false
+Name=Compare Two Files
 Tooltip=Compare Two Files
 ToolbarLabel=Compare Two Files
-Name=Compare Two Files
 Profiles=profile-zero
 Icon=meld
 
 [X-Action-Profile profile-zero]
-MimeTypes=text/*;application/*;
+#MimeTypes=text/*;application/*;
+MimeTypes=all/allfiles; !image/*;
 Exec=meld %F
 Name=Default profile
 SelectionCount=2

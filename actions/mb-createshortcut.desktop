@@ -1,12 +1,14 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
-ToolbarLabel[en_US]=Create Desktop Shortcut
-ToolbarLabel[en]=Create Desktop Shortcut
-ToolbarLabel[C]=Create Desktop Shortcut
+NoDisplay= false
 Name[en_US]=Create Desktop Shortcut
 Name[en]=Create Desktop Shortcut
 Name[C]=Create Desktop Shortcut
+ToolTip[en_US]=Create Desktop Shortcut
+ToolTip[en]=Create Desktop Shortcut
+ToolbarLabel[en_US]=Create Desktop Shortcut
+ToolbarLabel[en]=Create Desktop Shortcut
+ToolbarLabel[C]=Create Desktop Shortcut
 Profiles=profile-zero;
 Icon[en_US]=add
 Icon[en]=add
@@ -14,12 +16,14 @@ Icon[C]=add
 
 [X-Action-Profile profile-zero]
 MimeTypes=all/allfiles;!application/x-desktop
-Exec=$HOME/bin/createshortcut.sh %f
+TryExec=createshortcut.sh
+Exec=createshortcut.sh %f
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile
 
 [X-Action-Profile profile-1]
 MimeTypes=inode/directory
-Exec=$HOME/bin/createshortcut.sh %f 
+TryExec=createshortcut.sh
+Exec=createshortcut.sh %f 
 Name[en]=Create link to folder

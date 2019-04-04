@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Menu
+NoDisplay= false
+Icon=image-x-generic
+# This is the caption in pcmanfm
+Name=Menu Images
+# This shows up in the custom actions
+Tooltip=Images
+ToolbarLabel=Images
+ItemsList=convert-to-png;convert-to-svg;mb-set-as-wallpaper;slideshow;
+MimeTypes=image/*;

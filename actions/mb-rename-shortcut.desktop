@@ -1,22 +1,23 @@
 [Desktop Entry]
 Type=Action
-Hidden= false
-ToolbarLabel[en_US]=Rename Shortcut
-ToolbarLabel[en]=Rename Shortcut
-ToolbarLabel[C]=Rename Shortcut
+NoDisplay= false
 Name[en_US]=Rename Shortcut
 Name[en]=Rename Shortcut
 Name[C]=Rename Shortcut
-Profiles=profile-zero;
-
+ToolbarLabel[en_US]=Rename Shortcut
+ToolbarLabel[en]=Rename Shortcut
+ToolbarLabel[C]=Rename Shortcut
 Icon[en_US]=stock_spellcheck
 Icon[en]=stock_spellcheck
 Icon[C]=stock_spellcheck
 
+Profiles=profile-zero;
+
 [X-Action-Profile profile-zero]
 MimeTypes=application/x-desktop;
-Exec=$HOME/bin/renameshortcut.sh %d %b
+#TryExec=renameshortcut.sh 
+Exec=renameshortcut.sh %d %b
 Name[en_US]=Default profile
 Name[en]=Default profile
 Name[C]=Default profile
-SelectionCount==1
+SelectionCount= =1

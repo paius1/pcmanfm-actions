@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Menu
-Hidden= false
+NoDisplay= false
 Icon=menulibre
 Name=Menu Folders
 Tooltip=Folders Actions
 ToolbarLabel=Folders/Directories
-ItemsList=samba-share-ro;emblemizer;
+ItemsList=folder-usage;emblemizer;find-files;slideshow;samba-share-ro;
 MimeTypes=inode/directory;
