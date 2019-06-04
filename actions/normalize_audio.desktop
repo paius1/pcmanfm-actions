@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Action
+NoDisplay= false
+Name[en_US]=Normalize Audio
+Tooltip=Normalize Audio
+ToolbarLabel[en_US]=Normalize Audio
+TryExec=yad
+Icon=video
+Profiles=profile-video;
+Mimetypes=video/*;
+
+[X-Action-Profile profile-video]
+
+MimeTypes=video/*;
+Exec=Normalize_Audio.sh %f
+Name[en_US]=Normalize Audio
+

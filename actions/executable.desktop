@@ -5,10 +5,11 @@ Name[en_US]=Make Executable
 Name=Make Executable
 Profiles=profile-zero
 Icon=application-default-icon
-MimeTypes=all/allfiles;
+
+MimeTypes=all/all;!inode/directory;
 
 [X-Action-Profile profile-zero]
-MimeTypes=all/allfiles; !inode/directory;
+MimeTypes=!inode/directory;
 TryExec=make-executable.sh
 Exec=make-executable.sh %f
 Name=Default Profile

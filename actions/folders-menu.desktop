@@ -2,8 +2,8 @@
 Type=Menu
 NoDisplay= false
 Icon=menulibre
-Name=Menu Folders
-Tooltip=Folders Actions
+Name=Folder Actions
+Tooltip=Folder Actions
 ToolbarLabel=Folders/Directories
 ItemsList=folder-usage;emblemizer;find-files;slideshow;samba-share-ro;
 MimeTypes=inode/directory;

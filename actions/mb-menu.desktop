@@ -1,9 +1,9 @@
 [Desktop Entry]
-NoDisplay= false
 Type=Menu
+NoDisplay= false
 Icon=application-menu
 Name=Custom Actions
 Tooltip=Custom Actions
 ToolbarLabel=Custom Actions Menu
 SuggestedShortcut="C"
-ItemsList=development-menu;images-menu;mb-backup-here;mb-copy-to-folder;mb-createshortcut;mb-editshortcut;mb-rename-shortcut;mb-open-as-root;bulk-rename
+ItemsList=images-menu;videos-menu;mb-backup-here;development-menu;mb-copy-to-folder;mb-createshortcut;mb-editshortcut;mb-rename-shortcut;mb-open-as-root;bulk-rename;

@@ -13,6 +13,8 @@ Profiles=profile-zero;
 Icon[en_US]=add
 Icon[en]=add
 Icon[C]=add
+MimeTypes=all/allfiles;!application/x-desktop
+Folders=/*;!/home/paul/Desktop;
 
 [X-Action-Profile profile-zero]
 MimeTypes=all/allfiles;!application/x-desktop

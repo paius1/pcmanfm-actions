@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Menu
+NoDisplay= false
+Icon=image-x-generic
+Name=Videos
+Tooltip=Videos
+ToolbarLabel=Videos
+MimeTypes=videos/*;video/*;
+ItemsList=normalize_audio;merge_videos;

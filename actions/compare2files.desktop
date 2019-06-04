@@ -12,4 +12,4 @@ Icon=meld
 MimeTypes=all/allfiles; !image/*;
 Exec=meld %F
 Name=Default profile
-SelectionCount=2
+SelectionCount==2

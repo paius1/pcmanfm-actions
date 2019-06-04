@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Action
+NoDisplay= false
+Name[en_US]=Merge Video Files
+Tooltip=Merge Video Files
+ToolbarLabel[en_US]=Merge Video Files
+Icon=video
+Profiles=profile-merge-video;
+Mimetypes=video/*;videos/*;
+
+[X-Action-Profile profile-merge-video]
+
+MimeTypes=video/*;videos/*;
+TryExec=mencoder
+Exec=merge_videos.sh %U
+Name[en_US]=Merge Video Files
+SelectionCount=>1
