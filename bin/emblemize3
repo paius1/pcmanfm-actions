@@ -1,0 +1,177 @@
+#!/usr/bin/python3
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 2 of the License, or
+#       (at your option) any later version.
+#       
+#       This program is distributed in the hope that it will be useful,
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       GNU General Public License for more details.
+#       
+#       You should have received a copy of the GNU General Public License
+#       along with this program; if not, write to the Free Software
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       MA 02110-1301, USA.
+#       Dr. Amr Osman <dr3mro@gmail.com>
+#       version : 3.3
+#
+
+import os
+import sys
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import GObject
+from gi.repository import GdkPixbuf
+
+#create about_dialog
+def aboutGUI(widget):
+	about_dialog=Gtk.AboutDialog()
+	about_dialog.set_keep_above(True)
+	about_dialog.set_copyright("2012")
+	about_dialog.set_version("3.3")
+	about_dialog.set_title("About")
+	about_dialog.set_default_icon_from_file('/usr/share/icons/gnome/256x256/emotes/face-devilish.png')
+	about_dialog.set_transient_for(window)
+	about_dialog.set_program_name("Emblemizer")
+	about_dialog.set_authors(["Dr. Amr Osman"])
+	about_dialog.set_comments("To my dear Son and My beloved Wife \n I love you")
+	about_dialog.set_license("""
+       This program is free software; you can redistribute it and/or modify
+       it under the terms of the GNU General Public License as published by
+       the Free Software Foundation; either version 2 of the License, or
+       (at your option) any later version.
+       
+       This program is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+       GNU General Public License for more details.
+       
+       You should have received a copy of the GNU General Public License
+       along with this program; if not, write to the Free Software
+       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+       MA 02110-1301, USA.
+       """)
+	about_dialog.hide_on_delete()
+	about_dialog.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
+	about_dialog.run()
+	about_dialog.destroy()
+
+#main GUI
+def mainGUI():
+	global window ,apply_button,liststore,loadlabel
+
+#to keep the list store updated and avoid late appearance of main window
+	GObject.timeout_add_seconds(1,gen_list)
+
+#creating main window
+	window=Gtk.Window()#Gtk.WindowType.TOPLEVEL)
+	loadlabel=Gtk.Label("Please Wait while loading Icons")
+	liststore = Gtk.ListStore(GdkPixbuf.Pixbuf)
+	iconview = Gtk.IconView()#liststore)
+	iconview.set_model(liststore)
+	scrolledwindow = Gtk.ScrolledWindow()
+	apply_button=Gtk.Button("Apply")
+	clear_button=Gtk.Button("Clear Emblem")
+	about_button=Gtk.Button("About")
+	vbox=Gtk.VBox()
+	bbox=Gtk.HButtonBox()
+
+
+
+#setting main window elements properties
+
+	window.set_icon_from_file('/usr/share/icons/gnome/256x256/emotes/face-devilish.png')
+	window.set_size_request(390,472)
+	window.set_resizable(False)
+	window.set_title("Emblemizer")
+	window.set_position(Gtk.WindowPosition.CENTER)
+	window.set_border_width(10)
+	iconview.set_pixbuf_column(0)
+	scrolledwindow.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+	scrolledwindow.set_border_width(5)
+	scrolledwindow.add(iconview) 
+	bbox.set_layout(Gtk.ButtonBoxStyle.EDGE)
+
+#constructing window elements
+
+	bbox.pack_start(about_button,True,True,0)
+	bbox.pack_start(clear_button,True,True,0)
+	bbox.pack_start(apply_button,True,True,0)
+	vbox.pack_start(loadlabel,False,False,0)
+	vbox.pack_start(scrolledwindow,True,True,0)
+	vbox.pack_start(bbox,False,False,0)
+
+#connect signals
+	window.connect("destroy",Gtk.main_quit)
+	iconview.connect("selection_changed",on_icon_clicked)
+	clear_button.connect("clicked",emblemize,iconview,"clear")
+	apply_button.connect("clicked",emblemize,iconview,"emblemize")
+	about_button.connect("clicked",aboutGUI)
+	apply_button.set_sensitive(False)
+	window.add(vbox)
+	window.show_all()
+
+#create the list store
+def gen_list():
+	theme = Gtk.IconTheme()
+#	theme.set_custom_theme("hicolor")
+	icons=theme.list_icons(None)
+	choices=['face','stock','emblem','gnome','application']
+	badicons=['gnome-spinner','gnome-panel-separator']
+	for icon in icons:
+		for choice in choices:
+			if choice in icon and icon not in badicons and icon not in data:
+				pixbuf = theme.load_icon(icon, 48, 0)
+				liststore.append([pixbuf])
+				data.append(icon)
+	loadlabel.hide()
+	gen_list_status=True
+	return liststore
+
+def on_icon_clicked(widget):
+	apply_button.set_sensitive(True)
+
+def emblemize(widget,iconview,action=""):
+	item=iconview.get_selected_items()
+
+	if len (item) > 0:
+		index=item[0]
+		int_index=int(Gtk.TreePath.to_string(index))
+	else:
+		int_index=0
+	emb=data[int_index]
+
+
+	if action == "clear":
+		notify=' && notify-send --icon=info "emblemize" "File named %s emblem was reset successfully"' %(os.path.basename(fdname))
+		cmd='gvfs-set-attribute "%s" -t unset metadata::emblems %s ' %(fdname,notify)
+
+	if action == "emblemize" :
+		notify=' && notify-send --icon=info "emblemize" "File named %s emblem was changed successfully"' %(os.path.basename(fdname))
+		cmd='gvfs-set-attribute "%s" -t stringv metadata::emblems %s %s' %(fdname,emb,notify)
+
+	os.system(cmd)
+	window.hide()
+	refresh()
+	Gtk.main_quit()
+
+
+def refresh():
+	os.system("xte 'keydown Control_L' 'key R' 'keyup Control_L'")
+
+def main():
+	mainGUI()
+	Gtk.main()
+	refresh()
+
+if __name__=='__main__':
+	global data
+
+	fdname=sys.argv[1]
+	data=[]
+	files=[]
+	icons=[]
+	main()
+
